@@ -2,14 +2,19 @@
 ## prepare environment for testing
 	library(specificity)
 	#load data
-	data(endophyte)
+	set.seed(12345)
+	hostre <- rtree(200)
+	hosvar <- rep(hostre$tip.label, length=g_nsamp)
+	#hosidl <- sample(hostre$tip.label, 1)
+	hosidl <- "t85"
+
 	hosvar <- endophyte$metadata$PlantGenus
 	hostre <- endophyte$supertree
 	source("sliding_window.r")
 
 	# visualize distribution of patristic distances
 	a <- cophenetic.phylo(hostre)
-	hist(a[,colnames(a) == "Coprosma"])
+	hist(a[,colnames(a) == hosidl])
 
 ## Sensitivity of SES to occupancy
 	# simulate matrices three ways:
@@ -18,7 +23,7 @@
 		# 3. up = 0.40
 	# each will be analyzed both weighted and unweighted.
 	# define factors common to all 3 sims:
-	prm <- list( sdev = 70, ideal = "Coprosma", hosts=hosvar, hosts_phylo=hostre,
+	prm <- list( sdev=70, ideal=hosidl, hosts=hosvar, hosts_phylo=hostre,
 		n_obs = rep(5:1250, length.out=500), n_cores=12, seed = 1234567, n_sim = 300)
 
 	# simulate matrices
