@@ -45,7 +45,7 @@
 		save(list=ls(), file="spec_sens.rdata")
 	## plots (if running line-by-line)
 		par(mfrow=c(2,1))
-		plot(vec_spec_sd$SES ~ vec_sim_sd$params$sd)
+  		plot(vec_spec_sd$SES ~ vec_sim_sd$params$sd)
 		plot(vec_spec_up$SES ~ vec_sim_up$params$up)
 
 
